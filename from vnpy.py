@@ -2,11 +2,9 @@ from vnpy.event import EventEngine
 from vnpy.trader.engine import MainEngine
 from vnpy.trader.ui import MainWindow, create_qapp
 
-# 使用模拟交易接口替代CTP接口
-from vnpy_paperaccount import PaperAccountApp
+from vnpy_ctp import CtpGateway
 from vnpy_ctastrategy import CtaStrategyApp
 from vnpy_ctabacktester import CtaBacktesterApp
-from vnpy_datamanager import DataManagerApp
 
 
 def main():
@@ -16,11 +14,9 @@ def main():
     event_engine = EventEngine()
     main_engine = MainEngine(event_engine)
     
-    # 添加模拟交易接口，替代CTP接口
-    main_engine.add_app(PaperAccountApp)
+    main_engine.add_gateway(CtpGateway)
     main_engine.add_app(CtaStrategyApp)
     main_engine.add_app(CtaBacktesterApp)
-    main_engine.add_app(DataManagerApp)
 
     main_window = MainWindow(main_engine, event_engine)
     main_window.showMaximized()

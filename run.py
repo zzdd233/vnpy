@@ -1,3 +1,11 @@
+import os
+import sys
+from pathlib import Path
+
+# 更改当前工作目录到脚本所在目录
+script_dir = Path(__file__).parent
+os.chdir(script_dir)
+
 from vnpy.event import EventEngine
 from vnpy.trader.engine import MainEngine
 from vnpy.trader.ui import MainWindow, create_qapp
